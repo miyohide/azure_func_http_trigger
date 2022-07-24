@@ -1,5 +1,12 @@
+const {setTimeout} = require("timers/promises");
+
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
+
+    for (let i = 0; i < 300; i++) {
+        await setTimeout(1000);
+        context.log(`Waiting... ${i}`);
+    }
 
     const name = (req.query.name || (req.body && req.body.name));
     const responseMessage = name
